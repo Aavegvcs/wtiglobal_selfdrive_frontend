@@ -1,0 +1,9 @@
+/* Completely remove the side bar space */
+.rdrDefinedRangesWrapper {
+  display: none !important;
+}
+
+/* Expand the calendar to full width */
+.rdrCalendarWrapper {
+  width: 100% !important;
+}

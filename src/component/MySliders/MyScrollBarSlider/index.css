@@ -1,0 +1,15 @@
+#myScrollBarSlider .swiper-scrollbar {
+
+  background-color: #9d9c9cb4; /* scrollbar track */
+  border-radius: 8px;
+
+}
+
+/* The draggable thumb inside the scrollbar */
+#myScrollBarSlider .swiper-scrollbar-drag {
+  background-color: #eeeeee; /* thumb color */
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+
