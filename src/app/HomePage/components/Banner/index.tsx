@@ -7,7 +7,7 @@ import { bgColors } from "@/constant/colors";
 const Banner = () => {
   return (
     <>
-      <Section bgColor={bgColors.bgGrey} className="">
+      <Section bgColor={bgColors.bgGray} className="">
         <Container>
           <Image src={BannerImg} alt="" />
         </Container>

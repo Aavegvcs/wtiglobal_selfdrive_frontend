@@ -61,10 +61,6 @@ const DateField = ({ selectedDateRange, onRangeChange, label, value, placeholder
             onRangeChange(selectedDateRange);
             closeHandler();
         }
-
-
-
-
         if (count == 1) {
             setCount(0);
             closeHandler()
@@ -74,7 +70,7 @@ const DateField = ({ selectedDateRange, onRangeChange, label, value, placeholder
 
 
 
-    console.log(isOpen ,"isOpen")
+    console.log(isOpen, "isOpen")
 
     return (
         <div className='relative w-full'>

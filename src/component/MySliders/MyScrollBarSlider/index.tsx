@@ -4,8 +4,10 @@ import "swiper/css/scrollbar";
 import { Navigation, Scrollbar } from "swiper/modules";
 import "./index.css";
 import Image from "next/image";
+import { CarImagesProps } from "@/common/InventryCarCard/CarImages/CarImages";
 
-const MyScrollBarSlider = () => {
+const MyScrollBarSlider = ({ images }: CarImagesProps) => {
+
   return (
     <div id="myScrollBarSlider">
       <Swiper
@@ -20,37 +22,23 @@ const MyScrollBarSlider = () => {
         modules={[Scrollbar, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <Image
-            src="https://drive.yango.com/images/preview/rs:fill:320:200:1/q:80/g:ce/sm:1/ar:1/dpr:2/plain/s3://aggregator-media-me-central-1/746044ee-de23-4d44-ae87-3252886e7730/ec2ef857-de726d3f-94de5ffc-1795c503"
-            alt=""
-            className="w-full rounded-t-2xl"
-            width={100}
-            height={23}
 
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            src="https://drive.yango.com/images/preview/rs:fill:320:200:1/q:80/g:ce/sm:1/ar:1/dpr:2/plain/s3://aggregator-media-me-central-1/746044ee-de23-4d44-ae87-3252886e7730/ec2ef857-de726d3f-94de5ffc-1795c503"
-            alt=""
-            className="w-full rounded-t-2xl"
-            width={100}
-            height={23}
+        {
+          Array.isArray(images) && images.map((el, i) => {
+            return <SwiperSlide key={i}>
+              <div className="relative h-[240px]">
+                <Image
+                  src={el || "https://drive.yango.com/images/preview/rs:fill:320:200:1/q:80/g:ce/sm:1/ar:1/dpr:2/plain/s3://aggregator-media-me-central-1/746044ee-de23-4d44-ae87-3252886e7730/ec2ef857-de726d3f-94de5ffc-1795c503"}
+                  alt=""
+                  className="w-full rounded-t-2xl object-cover"
 
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            src="https://drive.yango.com/images/preview/rs:fill:320:200:1/q:80/g:ce/sm:1/ar:1/dpr:2/plain/s3://aggregator-media-me-central-1/746044ee-de23-4d44-ae87-3252886e7730/ec2ef857-de726d3f-94de5ffc-1795c503"
-            alt=""
-            className="w-full rounded-t-2xl"
-            width={100}
-            height={23}
+                  fill
+                />
+              </div>
+            </SwiperSlide>
 
-          />
-        </SwiperSlide>
-
+          })
+        }
 
       </Swiper>
     </div>

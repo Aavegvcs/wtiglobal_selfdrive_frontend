@@ -5,6 +5,7 @@ type SectionHeadingProps = {
   description?: string | undefined;
   fontSize: string | undefined;
   textColor: string | undefined;
+  marginBottom: string | undefined
 };
 
 const SectionHeading = ({
@@ -12,9 +13,10 @@ const SectionHeading = ({
   description,
   fontSize,
   textColor,
+  marginBottom = ""
 }: SectionHeadingProps) => {
   return (
-    <div className="flex flex-col gap-2 items-center">
+    <div className={`flex flex-col gap-2 items-center ${marginBottom}`}>
       {/* ================ HEADING ====================== */}
       {heading && (
         <h3 className={`${textColor} ${fontSize} font-semibold leading-8`}>

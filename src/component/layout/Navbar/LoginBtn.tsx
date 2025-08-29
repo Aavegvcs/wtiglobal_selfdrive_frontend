@@ -16,7 +16,7 @@ const LoginBtn = ({ isWhiteNavStyle, onClick }: LoginBtnProps) => {
   return (
     <button
       onClick={onClick}
-      className={`${bgColorBtn} ${loginGtnCls} ${colorStyle}`}
+      className={`${bgColorBtn} ${loginGtnCls} ${colorStyle} cursor-pointer`}
     >
       Login or Register
       <RiArrowDropDownLine className="text-2xl" />

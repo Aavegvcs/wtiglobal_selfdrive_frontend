@@ -9,7 +9,7 @@ import { useClickAway } from 'react-use'
 type TripTypeField = {
     textValue: string,
     code: number,
-    onClick : (num : number) =>void
+    onClick: (num: number) => void
 }
 
 
@@ -32,9 +32,9 @@ const TripTypeField = ({ textValue, code, onClick }: TripTypeField) => {
             }}>
                 <FieldWrapper>
                     <FieldLabel label='Trip Type' isIcon={false} />
-                    <FieldValue valueText='Daily Rental' placeholder='selected trip type' />
+                    <FieldValue valueText={textValue} placeholder='selected trip type' />
                 </FieldWrapper>
-                {isOpen && <TripTypeDropDown onClick ={onClick} />}
+                {isOpen && <TripTypeDropDown onClick={onClick} />}
             </div>
         </div>
     )

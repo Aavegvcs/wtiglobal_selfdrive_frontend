@@ -11,7 +11,7 @@ const GetInTouch = () => {
       <Container>
         <div className={`grid grid-cols-[1fr_1px_1fr] gap-8 rounded-[20px] p-10 shadow-[0px_4px_20px_0px_#0000001F] ${bgColors.bgWhite}`}>
           <ContactInfoPanel />
-          <DividerVertical color={bgColors.bgDarkGrey} />
+          <DividerVertical color={bgColors.bgDarkGray} />
           <ContactForm />
         </div>
       </Container>

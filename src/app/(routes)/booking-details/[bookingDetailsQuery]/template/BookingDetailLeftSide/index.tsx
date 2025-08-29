@@ -1,32 +1,30 @@
-import { bgColors } from '@/constant/colors'
 import React from 'react'
-import PrieTagTile from '../../components/PrieTagTile'
-import BookingDetailsQueryTile from '../../components/BookingDetailsQueryTile'
-import RentalPoliciesTile from '../../components/RentalPoliciesTile'
-import InsuranceOptionTile from '../../components/InsuranceOptionTile'
-import ComprehensiveInsuranceTile from '../../components/ComprehensiveInsuranceTile'
-import ImportantInfoTile from '../../components/ImportantInfoTile'
-import CarOverviewTile from '../../components/CarOverviewTile'
-import CarImageCatalogDesktop from '../../components/CarImageCatalogDesktop'
-import PickupMethodSelectorTile from '../../components/PickupMethodSelectorTile'
+import StepOne from './StepOne'
+import StepTwo from './StepTwo'
+import { bgColors } from '@/constant/colors'
+import { useBookingDetailsStore } from '@/state/useBookingDetailsStore'
+import { BookingDetailsI } from '@/types/interface'
 
 
-const BookingDetailLeftSide = () => {
+interface BookingDetailLeftSideProps {
+    bookingStep: number
+}
+
+const BookingDetailLeftSide = ({ bookingStep }: BookingDetailLeftSideProps) => {
+    const signleBookingDetails: BookingDetailsI = useBookingDetailsStore((store) => store.signleBookingDetails);
+    const carImage: string[] = signleBookingDetails?.vehicle_id?.images ?? [];
+    const carModelName = signleBookingDetails?.vehicle_id?.model_name ?? ""
+
     return (
+
         <div className={`flex flex-col  ${bgColors.bgWhite} rounded-xl`}>
-            <div className='p-6'>
-                <CarImageCatalogDesktop />
-                <PrieTagTile />
-                <BookingDetailsQueryTile />
-                <CarOverviewTile />
-                <RentalPoliciesTile />
-                <InsuranceOptionTile />
-                <ComprehensiveInsuranceTile />
-                <ImportantInfoTile />
-            </div>
-            <PickupMethodSelectorTile />
+            { bookingStep === 1 && <StepOne carImage={carImage} carModelName={carModelName} /> }
+            
+            { bookingStep === 2 && <StepTwo carImage={carImage} carModelName={carModelName} />}
+
 
         </div>
+
     )
 }
 

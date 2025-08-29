@@ -87,10 +87,6 @@ const DateField = ({ selectedDateRange, onRangeChange, label, value, placeholder
             onRangeChange(selectedDateRange);
             closeHandler();
         }
-
-
-
-
         if (count == 1) {
             setCount(0);
             closeHandler()

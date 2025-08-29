@@ -11,7 +11,7 @@ const bgBadgeGradient = `${gradientColor.inventoryBadgeGradientColor} ${textColo
 const Badge = ({ text, className = "" }: BadgeProps) => {
   return (
     <span
-      className={`${className} ${bgBadgeGradient} py-1 px-3 rounded-2xl font-semibold text-[12px] tracking-wider`}
+      className={`${className} ${bgBadgeGradient} rounded-2xl font-semibold text-[12px] tracking-wider`}
     >
       {text}
     </span>

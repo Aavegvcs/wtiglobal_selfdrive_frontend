@@ -42,7 +42,6 @@ const useGenerateDropTimeSlabs = ({
 
 
 
-    console.log(endDate, "useGenerateDropTimeSlabs")
 
 
 

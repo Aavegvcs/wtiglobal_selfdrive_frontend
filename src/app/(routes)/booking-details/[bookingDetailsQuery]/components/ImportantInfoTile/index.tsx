@@ -4,11 +4,13 @@ import React, { useState } from 'react'
 import BookingDetailTileWrapper from '../BookingDetailTileWrapper'
 import { bgColors, textColors } from '@/constant/colors'
 import TileHeading from '../TileHeading'
-import { Modal } from 'antd'
+
 import Image from 'next/image'
 import { importantInfoData } from '@/data/data'
 import Divider from '@/component/ui/Divider/Divider'
 import { ImportantInfoItemI } from '@/types/interface'
+import { Box, Modal } from '@mui/material'
+import { style } from '../../style'
 
 const ImportantInfoTile = () => {
 
@@ -55,15 +57,13 @@ const ImportantInfoTile = () => {
             </BookingDetailTileWrapper>
 
             <Modal
-                title={!!activeModalWithData && activeModalWithData.label}
-                centered ={true}
                 open={!!activeModalWithData}
-                onCancel={hideModal}
-                footer={null}
+                onClose={hideModal}
+
             >
-                {
-                    !!activeModalWithData && <div>{activeModalWithData.modalContent}</div>
-                }
+                <Box sx={style}>
+                    { !!activeModalWithData && <div>{activeModalWithData.modalContent}</div>   }
+                </Box>
             </Modal>
         </div>
     )

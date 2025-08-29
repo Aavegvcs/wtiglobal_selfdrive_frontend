@@ -2,9 +2,10 @@ import React from "react";
 
 type TextAreaField = {
   value: string;
-  placeholder: string;
-  bgColor: string;
-  onChange: (value: string) => void;
+  placeholder?: string;
+  bgColor?: string;
+  onChange?: (value: string) => void;
+  error?: string
 };
 
 const TextAreaField = ({
@@ -12,9 +13,10 @@ const TextAreaField = ({
   placeholder,
   bgColor,
   onChange,
+  error
 }: TextAreaField) => {
   return (
-    <>
+    <div className="flex flex-col">
       <textarea
         value={value}
         placeholder={placeholder}
@@ -22,8 +24,12 @@ const TextAreaField = ({
         onChange={(e) => {
           onChange(e.target.value);
         }}
+
+
       ></textarea>
-    </>
+
+      {error && <p className="text-red-500 text-sm">{error}</p>}
+    </div>
   );
 };
 

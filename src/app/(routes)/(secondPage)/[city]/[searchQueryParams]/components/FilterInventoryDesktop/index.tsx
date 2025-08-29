@@ -23,7 +23,7 @@ const FilterInventoryDesktop = () => {
 
                     <div className='flex gap-1.5'>
                         <FilterSearchBar />
-                        <DividerVertical color={bgColors.bgExtraDarkGrey} />
+                        <DividerVertical color={bgColors.bgExtraDarkGray} />
                         <div className={`flex gap-1 items-center ${textColors.lightBlack}`}>
                             <span className={`font-semibold text-base`}>Sorted</span>
                             <TbArrowsSort className='text-xl' />

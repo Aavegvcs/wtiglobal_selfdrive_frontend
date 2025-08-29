@@ -17,7 +17,7 @@ const ChooseCurrency = ({ onClick, isWhiteNavStyle }: ChooseCurrencyProps) => {
 
   return (
     <button
-      className={`${paddingCls} ${colorStyle} ${textStyle}`}
+      className={`${paddingCls} ${colorStyle} ${textStyle} cursor-pointer`}
       onClick={onClick}
     >
       <span className={`text-[10px]`}>Choose Currency</span>

@@ -5,8 +5,14 @@ import { IoLocationOutline } from 'react-icons/io5'
 import { bgColors, textColors } from '@/constant/colors'
 import Divider from '@/component/ui/Divider/Divider'
 import { RiCalendarScheduleLine } from 'react-icons/ri'
+import { TariffForSingleInventoryI } from '@/types/helper.interface'
 
-const BookingDetailsQueryTile = () => {
+type BookingDetailsQueryTileProps = {
+    selectedTariff: TariffForSingleInventoryI | null,
+
+}
+
+const BookingDetailsQueryTile = ({ selectedTariff }: BookingDetailsQueryTileProps) => {
     return (
         <div className='mb-6'>
             <BookingDetailTileWrapper padding='py-6 px-5'>
@@ -26,14 +32,13 @@ const BookingDetailsQueryTile = () => {
                             <RiCalendarScheduleLine className={`${textColors.lightGray} text-lg`} />
                             <p className={`${textColors.lightBlack} text-sm`}>
                                 <React.Fragment>
-                                    <span className={`font-semibold`}>10 June 2025</span> ,
-                                    <span>10:00hrs</span>
+                                    <span className={`font-semibold`}>{selectedTariff?.pickup.date}</span> ,
+                                    <span>{selectedTariff?.pickup.time} hrs</span>
 
                                 </React.Fragment> -
                                 <React.Fragment>
-                                    <span className={`font-semibold`}>14 June 2025</span> ,
-                                    <span>10:00hrs</span>
-
+                                    <span className={`font-semibold`}>{selectedTariff?.drop.date}</span> ,
+                                    <span>{selectedTariff?.drop.time} hrs</span>
                                 </React.Fragment>
                             </p>
                         </div>

@@ -9,7 +9,7 @@ type FareComponentLabelValProps = {
 const FareComponentLabelVal = ({ label, val }: FareComponentLabelValProps) => {
     return (
         <div className='flex justify-between items-center mb-2'>
-            <span className={`${textColors.darkBlack} text-sm font-medium`}>{label}</span>
+            <span className={`${textColors.darkBlack} text-sm font-medium capitalize`}>{label}</span>
             <span className={`${textColors.darkBlack} text-sm font-semibold`}>{val}</span>
         </div>
     )

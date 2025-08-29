@@ -1,5 +1,7 @@
 import { DateTime } from "luxon";
-import { SelectedTime } from "../types/types";
+import { inventryPayloadMakerHelperT, InventryQueryT, SelectedTime } from "../types/types";
+import { dateFormat } from "@/utils/DateHelper/utils.date";
+import { tripTripMap } from "@/constant/constant.maps";
 
 
 export const generateTimeSlab = ({ date, timeZone }: { date: DateTime, timeZone: string }): SelectedTime[] => {
@@ -38,3 +40,36 @@ export const filterTimeSlabs = ({ allTimeSlabs = [], minimumTime }: { allTimeSla
         return slabTimeLuxon.toMillis() >= minimumTime.toMillis();
     });
 };
+
+
+
+
+export const getInventryPayloadMakerHelper = ({ source, pickup, drop, minDate, plan_type, vehicle_class, duration_months }: inventryPayloadMakerHelperT) => {
+
+
+
+
+
+    const query: InventryQueryT = {
+        source: source,
+        pickup: {
+            date: pickup && dateFormat(pickup.date),
+            time: pickup.time
+        },
+        drop: {
+            date: dateFormat(drop.date),
+            time: drop.time
+        },
+        minDate: dateFormat(minDate),
+        plan_type: plan_type,
+        vehicle_class: vehicle_class
+    }
+
+    if (plan_type === tripTripMap.MONTHLY_RENTAL.code) {
+        query.duration_months = duration_months
+    }
+
+
+
+    return query;
+}

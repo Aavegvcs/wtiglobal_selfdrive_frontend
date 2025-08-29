@@ -1,10 +1,16 @@
 import InventryCarCard from "@/common/InventryCarCard";
+import { CarInvertoryI } from "@/types/interface";
 
-const InventoryCarList = () => {
+export type InventoryCarListProps = {
+  inventryList: CarInvertoryI[]
+  bookNowHandler: (vehicle_id: string) => void
+}
+
+const InventoryCarList = ({ inventryList ,bookNowHandler }: InventoryCarListProps) => {
   return (
     <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">
-      {[1, 2, 3, 4, 5, 6, 7].map((el, i) => {
-        return <InventryCarCard key={i} />;
+      {Array.isArray(inventryList) && inventryList.map((el, i) => {
+        return <InventryCarCard key={i} inventryCard={el} bookNowHandler = {bookNowHandler}/>;
       })}
     </div>
   );

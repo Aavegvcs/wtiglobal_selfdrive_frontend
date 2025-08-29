@@ -1,10 +1,18 @@
 import React from 'react'
 import FareDetailsPanel from '../../components/FareDetailsPanel'
+import { TariffForSingleInventoryI } from '@/types/helper.interface'
 
-const BookingDetailRightSide = () => {
+export interface BookingDetailRightSideProps {
+  
+    selectedTariff: TariffForSingleInventoryI
+    nextStepAction: () => void
+    bookingStep : number
+}
+
+const BookingDetailRightSide = ({ selectedTariff, nextStepAction , bookingStep  }: BookingDetailRightSideProps) => {
     return (
         <>
-            < FareDetailsPanel />
+            < FareDetailsPanel  selectedTariff={selectedTariff} nextStepAction={nextStepAction} bookingStep ={bookingStep} />
         </>
     )
 }

@@ -1,10 +1,14 @@
 import MyScrollBarSlider from "@/component/MySliders/MyScrollBarSlider";
 import React from "react";
 
-const CarImages = () => {
+export type CarImagesProps = {
+  images: string[]
+}
+
+const CarImages = ({ images }: CarImagesProps) => {
   return (
     <>
-      <MyScrollBarSlider />
+      <MyScrollBarSlider images={images} />
     </>
   );
 };

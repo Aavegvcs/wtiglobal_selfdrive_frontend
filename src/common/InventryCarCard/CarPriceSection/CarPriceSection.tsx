@@ -1,28 +1,45 @@
+import Badge from "@/component/ui/Badge/Badge";
 import { textColors } from "@/constant/colors";
+import { Tariff } from "@/types/helper.interface";
+import { isEmpty, String } from "lodash";
 import React from "react";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 
-// type CarPriceSectionProps = {};
+type CarPriceSectionProps = {
+  tariff_daily: Tariff,
+  tariff_monthly: Tariff,
+  monthly_discount_percentage: string,
+  AppliedPlanPrice: string
+};
 
-const CarPriceSection = () => {
+const CarPriceSection = ({ tariff_monthly, monthly_discount_percentage,  AppliedPlanPrice }: CarPriceSectionProps) => {
+  const { base: baseForMonthly } = tariff_monthly || {};
+
+
+
+
+
   return (
     <div className="flex flex-col">
-      {/* CROSS PRICE */}
+      {/* MONTH PRICE */}
+
+      <div className="flex items-start gap-2">
+
+        <PriceLine
+          priceVal={`${baseForMonthly} / Month`}
+          className={`${textColors.lightBlack} text-[14px]`}
+        />
+        {monthly_discount_percentage && <Badge text={`${monthly_discount_percentage}`} className="py-0.5 px-2 1 text-[10px] rounded-b-2xl" />}
+
+      </div>
+
+
+      {/*  DAY PRICE */}
       <PriceLine
-        priceVal="234"
-        className={`${textColors.lightGrey} text-[14px] line-through`}
-      />
-      {/* CROSS PRICE */}
-      <PriceLine
-        priceVal="234/day"
+        priceVal={AppliedPlanPrice}
         className={`${textColors.lightBlack} text-xl font-semibold`}
       />
-      {/* CROSS PRICE */}
-      <PriceLine
-        preText="Total - "
-        priceVal="234"
-        className={`${textColors.lightGrey} font-medium text-[12px]`}
-      />
+
     </div>
   );
 };

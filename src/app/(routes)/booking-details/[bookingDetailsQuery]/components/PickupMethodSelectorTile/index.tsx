@@ -1,9 +1,10 @@
- 
- import { bgColors } from '@/constant/colors'
+
+import { bgColors } from '@/constant/colors'
 import React from 'react'
 import BookingDetailTileWrapper from '../BookingDetailTileWrapper'
 import TileHeading from '../TileHeading'
 import PickupOption from './PickupOption'
+import SearchMap from './SearchMap'
 
 const PickupMethodSelectorTile = () => {
 
@@ -15,8 +16,7 @@ const PickupMethodSelectorTile = () => {
                     <TileHeading title={`How do you want to pick up your car?`} />
                     <div className='grid grid-cols-[0.8fr_1.2fr] gap-8'>
                         {/* Google Map */}
-                        <div
-                        ></div>
+                        <SearchMap />
 
                         <PickupOption />
                     </div>

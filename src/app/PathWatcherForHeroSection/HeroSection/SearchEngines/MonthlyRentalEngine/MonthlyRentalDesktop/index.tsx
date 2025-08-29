@@ -1,38 +1,38 @@
 import Container from '@/component/layout/Container'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import SearchQueryBtn from '../../../components/SearchQueryBtn'
 import FeatureHighlight from '../../../components/FeatureHighlight'
 import LocationField from '../../../components/LocationField'
-import { LocationFieldI, SelectedTime } from '../../../types/types'
-import { dateFormat, getCurrentTime, timeIn24HourFormat } from '@/utils/DateHelper/utils.date'
-import useGeneratePickUpTimeSlabs from '../../../hooks/useGeneratePickUpTimeSlabs'
+import { LocationFieldI } from '../../../types/types'
+import { dateFormat, getCurrentTime } from '@/utils/DateHelper/utils.date'
 import useGetSuggestedLocation from '@/hooks/useGetSuggestedLocation'
-import DateField from '../../../components/DateField'
-import { Range } from 'react-date-range'
 import TimePickerField from '../../../components/TimePickerField'
 import SelectMonthField from '../../../components/SelectMonthField'
 import SingleDateField from '../../../components/SingleDateField'
+import { isEmpty } from 'lodash'
+import { getInventryPayloadMakerHelper } from '../../../helpsFunc'
+import { searchEngineStore } from '@/state/searchEngineStore'
+import { tripTripMap } from '@/constant/constant.maps'
+import useNavigation from '@/hooks/useNavigation'
 
 const MonthlyRentalDesktop = () => {
-    const [source, setSource] = useState<LocationFieldI>({ city: "", countryCode: "" });
-    // eslint-disable-next-line no-console
-    const [minDate, setMinDate] = useState<SelectedTime>(
-        {
-            time: getCurrentTime().toISO() ?? "",
-            timeZone: getCurrentTime()?.zoneName ?? "",
-        }
-    );
-    const [selected, setSelected] = React.useState<Date | undefined>(getCurrentTime().toJSDate());
+
+    const { navigate } = useNavigation()
 
 
-    const [pickupTime, setPickupTime] = useState<SelectedTime>(
-        {
-            time: getCurrentTime()?.toISO() ?? "",
-            timeZone: getCurrentTime()?.zoneName ?? "",
-        }
-    )
+    const source = searchEngineStore((store) => store.source)
+    const pickupDateForMonth = searchEngineStore((store) => store.pickupDateForMonth)
+    const pickuptime = searchEngineStore((store) => store.pickuptime)
+    const totalMonthDuration = searchEngineStore((store) => store.totalMonthDuration)
+    const minDate = searchEngineStore((store) => store.minDate)
 
-    const [forTotalMonth, setForTotalMonth] = useState<number>(4);
+
+    const addSourceAction = searchEngineStore((store) => store.addSourceAction)
+    const addPickupDateForMonthAction = searchEngineStore((store) => store.addPickupDateForMonthAction)
+    const addPickupTimeAction = searchEngineStore((store) => store.addPickupTimeAction)
+    const addtotalMonthDurationAction = searchEngineStore((store) => store.addtotalMonthDurationAction)
+
+
 
 
 
@@ -46,26 +46,25 @@ const MonthlyRentalDesktop = () => {
 
     // SELECT DATE RANGE HANDLER
     const handlerDateRange = (dateVal: Date) => {
-        setSelected(dateVal);
+        addPickupDateForMonthAction(dateVal);
     }
 
 
     // SET SOURCE LOCATION
-    const handlerSourceLocation = (locVal: LocationFieldI) => setSource(locVal);
-
+    const handlerSourceLocation = (locVal: LocationFieldI) => addSourceAction(locVal);
     // SET PICKUP TIME
-    const handlerPickUpTime = (timeVal: SelectedTime) => setPickupTime(timeVal);
+    const handlerPickUpTime = (timeVal: string) => addPickupTimeAction(timeVal)
 
-    // SET PICKUP TIME
-    const handlerForTotalMonth = (num: number) => setForTotalMonth(num);
+    // SET TOTAL MONTH TIME
+    const handlerForTotalMonth = (num: number) => addtotalMonthDurationAction(num);
 
 
-    const { pickupTimeSlabs } = useGeneratePickUpTimeSlabs({
-        startDate: selected!, timeZone: minDate.timeZone,
-        pickupTime: pickupTime,
-        minDate: minDate,
-        setPickupTime: handlerPickUpTime
-    })
+    // const { pickupTimeSlabs } = useGeneratePickUpTimeSlabs({
+    //     startDate: selected!, timeZone: minDate.timeZone,
+    //     pickupTime: pickupTime,
+    //     minDate: minDate,
+    //     setPickupTime: handlerPickUpTime
+    // })
 
     const { suggestLocationList = [] } = useGetSuggestedLocation();
 
@@ -78,30 +77,59 @@ const MonthlyRentalDesktop = () => {
 
 
     // START DATE
-    const startDateValueStr = dateFormat(selected);
-
-
+    const startDateValueStr = dateFormat(pickupDateForMonth);
 
 
 
 
     // PICKUP TIME IN 24 HOURS FORMAT
-    const pickUpTimeValueStr = timeIn24HourFormat({ time: pickupTime?.time, timeZone: pickupTime?.timeZone });
+    const pickUpTimeValueStr = pickuptime || "";
+
+
+
+
+    const searchHandler = () => {
+        const query = getInventryPayloadMakerHelper({
+            source: source,
+            pickup: {
+                date: pickupDateForMonth,
+                time: pickuptime
+            },
+            drop: {
+                date: pickupDateForMonth,
+                time: pickuptime
+            },
+            minDate: minDate,
+            plan_type: tripTripMap.MONTHLY_RENTAL.code,
+            vehicle_class: "all",
+            duration_months: totalMonthDuration
+        })
+
+
+        const path = `${source.city}/monthly-car-rental`
+
+        if (!isEmpty(source) && source.city) {
+            navigate(path, query);
+
+            console.log(query, "query114")
+        }
+    }
+
+
     return (
 
         <React.Fragment>
             <Container>
                 <div className='flex flex-col w-full items-center gap-4'>
-                    <MonthlyRentalDesktopStrip>
-
+                    <MonthlyRentalDesktopStrip onClick={searchHandler}>
                         {/* LOCATION FIELD */}
-                        <LocationField label='City' value={source && source?.city} placeholder='City' onClick={handlerSourceLocation}
+                        <LocationField label='City' value={source?.city || ""} placeholder='City' onClick={handlerSourceLocation}
                             locationList={suggestLocationList}
                         />
                         <div className='grid grid-cols-2 gap-1'>
                             <div className='grid grid-cols-2 gap-1'>
                                 <SingleDateField
-                                    selectedDate={selected!}
+                                    selectedDate={pickupDateForMonth}
                                     onChange={handlerDateRange}
                                     label='From Date' value={startDateValueStr}
                                     placeholder=''
@@ -113,13 +141,11 @@ const MonthlyRentalDesktop = () => {
                                     value={pickUpTimeValueStr}
                                     placeholder=''
                                     onSelect={handlerPickUpTime}
-                                    timeSlabList={pickupTimeSlabs}
-                                    minDate={minDate}
                                 />
                             </div>
                             <SelectMonthField
                                 label='For Month'
-                                value={forTotalMonth}
+                                value={totalMonthDuration}
                                 placeholder='Select Month'
                                 onClick={handlerForTotalMonth}
                             />

@@ -24,9 +24,7 @@ const CarOverviewTile = () => {
                                         </div>
                                         <button className={`bg-transparent ${textColors.lightGray} text-sm font-medium`}>{el.value}</button>
                                     </div>
-
                                     <Divider color={bgColors.bgDivider} />
-
                                 </div>
                             })
                         }

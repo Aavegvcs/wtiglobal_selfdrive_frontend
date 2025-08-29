@@ -8,7 +8,8 @@ export const bgColors = {
     bgLightGray: "bg-[#EDEDED]",
     bgFadeWhite: "bg-[#F6F6F6]",
     bgLightFadeGreen: "bg-[#ECFFED]",
-    bgTransparent : "bg-transparent"
+    bgTransparent : "bg-transparent",
+    bgBlack : "bg-black"
     
 }
 
@@ -27,7 +28,8 @@ export const textColors = {
     textBlack: "text-[#000000]",
     textYellow: "text-[#FEC200]",
     textFadeGrayLight: "text-[#959595]",
-    textGreen: "text-[#029154]"
+    textGreen: "text-[#029154]",
+    textOrange : "text-[#EF5600]"
 
 }
 

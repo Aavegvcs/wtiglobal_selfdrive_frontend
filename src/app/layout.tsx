@@ -5,6 +5,9 @@ import Footer from "@/component/layout/Footer";
 import QueryProvider from "@/QueryProvide";
 import PathWatcherForHeroSection from "@/app/PathWatcherForHeroSection";
 import "./globals.css";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+
+
 
 export const lato = Lato({
   subsets: ["latin"],
@@ -25,18 +28,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
+
+
   return (
     <html lang="en">
       <body
         suppressHydrationWarning={true}
         className={`${lato.className} ${lato.className}`}
       >
-        <QueryProvider>
-          <Navbar />
-          <PathWatcherForHeroSection />
-          {children}
-          <Footer />
-        </QueryProvider>
+
+        <AppRouterCacheProvider>
+
+          <QueryProvider>
+            <Navbar />
+            <PathWatcherForHeroSection />
+            {children}
+            <Footer />
+          </QueryProvider>
+        </AppRouterCacheProvider>
+
+
       </body>
     </html>
   );

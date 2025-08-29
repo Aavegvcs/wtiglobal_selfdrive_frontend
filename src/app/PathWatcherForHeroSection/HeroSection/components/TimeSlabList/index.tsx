@@ -1,55 +1,52 @@
 import Divider from '@/component/ui/Divider/Divider'
 import { bgColors, textColors } from '@/constant/colors'
-import { timeIn24HourFormat } from '@/utils/DateHelper/utils.date'
-import { DateTime } from 'luxon'
-import { SelectedTime } from "@/app/PathWatcherForHeroSection/HeroSection/types/types"
+// import { DateTime } from 'luxon'
+// import { SelectedTime } from "@/app/PathWatcherForHeroSection/HeroSection/types/types"
 import React from 'react'
+import { timeSlabList } from '@/constant/constant.maps'
 
 
 
-type CategorizedSlots = {
-    [category: string]: {
-        time: string;
-        timeZone: string;
-    }[];
-};
+// type CategorizedSlots = {
+//     [category: string]: {
+//         time: string;
+//         timeZone: string;
+//     }[];
+// };
 
 
 type TimeSlabListProps = {
-    timeSlabList: SelectedTime[],
-    minDate: SelectedTime,
-    onSelect: (val: SelectedTime) => void
-
+    onSelect: (val: string) => void
 }
 
-const categorizeTimeSlots = ({ slabs = [] }: { slabs: SelectedTime[] }) => {
-    const categories: CategorizedSlots = {
-        "Morning Time": [],
-        "Evening Time": [],
-    }
+// const categorizeTimeSlots = ({ slabs = [] }: { slabs: SelectedTime[] }) => {
+//     const categories: CategorizedSlots = {
+//         "Morning Time": [],
+//         "Evening Time": [],
+//     }
 
 
-    slabs.forEach((el: SelectedTime) => {
-        const dt = DateTime.fromISO(el.time, { zone: el.timeZone });
-        const hour = dt.hour;
+//     slabs.forEach((el: SelectedTime) => {
+//         const dt = DateTime.fromISO(el.time, { zone: el.timeZone });
+//         const hour = dt.hour;
 
-        if (hour < 12) {
-            categories["Morning Time"].push(el);
-        } else if (hour >= 12 && hour < 24) {
-            categories["Evening Time"].push(el);
-        }
-    });
+//         if (hour < 12) {
+//             categories["Morning Time"].push(el);
+//         } else if (hour >= 12 && hour < 24) {
+//             categories["Evening Time"].push(el);
+//         }
+//     });
 
-    return categories;
-}
-
-
+//     return categories;
+// }
 
 
 
-const TimeSlabList = ({ timeSlabList, minDate, onSelect }: TimeSlabListProps) => {
 
-    const categorizedSlots = categorizeTimeSlots({ slabs: timeSlabList });
+
+const TimeSlabList = ({ onSelect }: TimeSlabListProps) => {
+
+    // const categorizedSlots = categorizeTimeSlots({ slabs: timeSlabList });
 
 
 
@@ -62,11 +59,25 @@ const TimeSlabList = ({ timeSlabList, minDate, onSelect }: TimeSlabListProps) =>
                 </div>
                 <Divider color={bgColors.bgDivider} />
             </div>
-            
+
 
             <div className='overflow-y-scroll py-3 px-2 h-[360px]'>
+                <div className="grid grid-cols-2 gap-2">
+                    {
+                        timeSlabList.map((el, i) => {
+                            return <button
+                                key={i}
+                                // disabled={isDisabled}
+                                onClick={() => { onSelect(el.value) }}
+                                className={`py-3 px-6 rounded-sm font-semibold text-sm ${`${bgColors.bgFogWhite} ${textColors.darkBlack}`} cursor-pointer`}
+                            >
+                                {el.value}
+                            </button>
+                        })
+                    }
+                </div>
 
-                {
+                {/* {
                     Object.entries(categorizedSlots).map(([label, slots]) => (
                         <div key={label} className='mb-5'>
                             <h5 className={`text-sm font-semibold mb-2 px-1 ${textColors.lightBlack}`}>{label}</h5>
@@ -87,13 +98,12 @@ const TimeSlabList = ({ timeSlabList, minDate, onSelect }: TimeSlabListProps) =>
                                         </button>
                                     )
                                 }
-
                                 )}
                             </div>
                         </div>
 
                     ))
-                }
+                } */}
             </div>
 
 

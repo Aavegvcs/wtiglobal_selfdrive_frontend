@@ -1,15 +1,10 @@
 "use client";
-import { Radio } from 'antd'
-import { CheckboxGroupProps } from 'antd/es/checkbox'
-import React, { useState } from 'react'
+
 
 
 
 const PickupOption = () => {
-   
-
-
-    const pickupOptionList: CheckboxGroupProps<string>['options'] = [
+    const pickupOptionList = [
         {
             label: "Self Pickup",
             value: "SELF_PICKUP"
@@ -19,18 +14,22 @@ const PickupOption = () => {
             value: "PAID_DELIVERY"
         }
     ]
+    const hubOptionList = [
+        {
+            label: "WTI Hub",
+            value: "WTI_HUB"
+        },
 
-     const [selectedPickupOption, setSelectedPickupOption] = useState(pickupOptionList[0])
+    ]
+  
 
-     const onChangeHandler =() =>{
-        
-     }
+
 
     return (
-        <div>
+        <div className='flex flex-col gap-5'>
 
-            <Radio.Group value={""} options={pickupOptionList}>
-            </Radio.Group>
+           
+
         </div>
     )
 }

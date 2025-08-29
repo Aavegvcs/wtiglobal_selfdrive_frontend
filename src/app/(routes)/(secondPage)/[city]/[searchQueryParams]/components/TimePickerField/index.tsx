@@ -5,18 +5,19 @@ import FieldWrapper from "../ui/FieldWrapper";
 import FieldLabel from "../ui/FieldLabel";
 import FieldValue from "../ui/FieldValue";
 import TimeSlabList from "@/app/PathWatcherForHeroSection/HeroSection/components/TimeSlabList";
+import { DateFieldProps } from "@/app/PathWatcherForHeroSection/HeroSection/components/TimePickerField";
 
-type DateFieldProps = {
-    label: string,
-    value: string,
-    placeholder: string,
-    timeSlabList: SelectedTime[],
-    onSelect: (val: SelectedTime) => void,
-    minDate: SelectedTime
-}
+// type DateFieldProps = {
+//     label: string,
+//     value: string,
+//     placeholder: string,
+//     timeSlabList: SelectedTime[],
+//     onSelect: (val: SelectedTime) => void,
+//     minDate: SelectedTime
+// }
 
 
-const TimePickerField = ({ label, value, placeholder, timeSlabList, onSelect, minDate }: DateFieldProps) => {
+const TimePickerField = ({ label, value, placeholder, onSelect, }: DateFieldProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const ref = useRef<HTMLDivElement>(null);
@@ -37,7 +38,7 @@ const TimePickerField = ({ label, value, placeholder, timeSlabList, onSelect, mi
                     <FieldValue valueText={value} placeholder={placeholder} />
                 </FieldWrapper>
                 {
-                    isOpen && <TimeSlabList timeSlabList={timeSlabList} minDate={minDate} onSelect={onSelect} />
+                    isOpen && <TimeSlabList onSelect={onSelect} />
                 }
             </div>
 

@@ -7,7 +7,7 @@ import Container from '@/component/layout/Container';
 const MonthlyCarRentalPage = () => {
   return (
     <>
-      <Section bgColor={bgColors.bgGrey}>
+      <Section bgColor={bgColors.bgGray}>
         <Container>
           <InventoryMonthlyHome />
         </Container>

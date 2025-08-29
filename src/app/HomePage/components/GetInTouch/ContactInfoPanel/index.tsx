@@ -3,6 +3,7 @@ import ContactInfoBlock from "@/app/HomePage/components/GetInTouch/ContactInfoBl
 import { TbMailBitcoin } from "react-icons/tb";
 import Divider from "@/component/ui/Divider/Divider";
 import SocialMedia from "@/app/HomePage/components/GetInTouch/SocialMedia";
+import { MdOutlineSupportAgent } from 'react-icons/md';
 
 
 const ContactInfoPanel = () => {
@@ -17,7 +18,7 @@ const ContactInfoPanel = () => {
                     <div className="flex flex-col pe-11">
                         <ContactInfoBlock icon={<TbMailBitcoin className={`${textColors.textWhite}`} />} title="Send your query" content="info@wticabs.com" />
                         <Divider color={bgColors.bgDivider} />
-                        <ContactInfoBlock icon={<TbMailBitcoin className={`${textColors.textWhite}`} />} title="Priority Support" content="011-45434500, 9250057902" />
+                        <ContactInfoBlock icon={<MdOutlineSupportAgent className={`${textColors.textWhite}`} />} title="Priority Support" content="011-45434500, 9250057902" />
                     </div>
                 </div>
                 <SocialMedia />

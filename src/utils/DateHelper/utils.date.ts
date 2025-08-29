@@ -22,7 +22,7 @@ export const getCurrentTime = (): DateTime => {
 
 
 
-export const dateFormat = (date: unknown): string => {
+export const dateFormat = (date: Date): string => {
     if (!lodash.isDate(date)) {
         console.warn("INVALID DATE");
         return "";
@@ -48,6 +48,22 @@ export const timeIn24HourFormat = ({ time, timeZone }: { time: string, timeZone:
 }
 
 
+
+export const parseDDMMYYYY = (dateStr: string): Date | null => {
+    const parts = dateStr.split('/');
+    if (parts.length !== 3) return null;
+
+    const [day, month, year] = parts.map(Number);
+
+    if (
+        isNaN(day) || isNaN(month) || isNaN(year) ||
+        day < 1 || day > 31 ||
+        month < 1 || month > 12
+    ) return null;
+
+    // month is 0-based in JS Date
+    return new Date(year, month - 1, day);
+};
 
 
 

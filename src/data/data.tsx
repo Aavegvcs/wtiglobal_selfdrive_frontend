@@ -9,6 +9,7 @@ import PaymentImportantIofIcon from "@/assets/icons/payment_important_info_icon.
 import MinimumAgeImportantIofIcon from "@/assets/icons/minimum_age_important_info_icon.svg"
 import MinimumDrivingExperienceImportantIofIcon from "@/assets/icons/minimum_driving_experience_important_info_icon.svg"
 import RequiredDocumentImportantIofIcon from "@/assets/icons/required_document_important_info_icon.svg"
+import { RentalPolicyItemT } from "@/types/types";
 
 export const inventoryCategoryList: ChipsOptionI[] = [
     {
@@ -56,6 +57,8 @@ export const carCarInfoList = [
     }
 ]
 
+
+
 export const carRentalLlocationList: ChipsOptionI[] = [
     {
         label: "UAE",
@@ -86,6 +89,8 @@ export const carRentalLlocationList: ChipsOptionI[] = [
         value: "TURKEY"
     },
 ]
+
+
 
 export const socialMediaInfoList: SocialMediaI[] = [
     {
@@ -248,22 +253,40 @@ export const filterTabs = [
 ]
 
 
-export const rentalPolicyList = [
+export const rentalPolicyList: RentalPolicyItemT[] = [
     {
         icon: MileagePolicyIcons,
-        text: "Mileage",
+        title: "Mileage Policy",
+        body: {
+            description: "Most rentals include a daily mileage limit (e.g., 250 km/day). Exceeding this incurs additional charges at AED 0.5 per extra km. Some providers offer unlimited mileage or extra mileage package options.",
+            postulates: [
+                "Planning a long trip? Request a discounted extra mileage package from the rental company in advance to avoid per-km charges."
+            ]
+        }
     },
     {
         icon: FuelPolicyIcons,
-        text: "Fuel Policy",
+        title: "Fuel Policy",
+        body: {
+            description: "Return the car with the same fuel level as received to avoid refueling charges.",
+            postulates: ["Take a picture of the fuel gauge at pickup and drop-off as proof, and keep the fuel receipt to avoid disputes."]
+        }
     },
     {
         icon: DepositPolicyIcons,
-        text: "Deposit Policy",
+        title: "Deposit Policy",
+        body: {
+            description: "A refundable deposit is held via credit card pre-authorization and refunded within 30 days. Some companies offer a zero-deposit option for a non-refundable fee.",
+            postulates: ["Using a debit card, cash or bank transfer? Refunds take longer, require manual processing, and may incur transfer and currency conversion fees. Check with your provider in advance."]
+        }
     },
     {
         icon: RentalPolicyIcons,
-        text: "Rental Policy",
+        title: "Rental Policy",
+        body: {
+            description: "Car rentals operate on a 24-hour cycle—returning late, even by an hour, may result in a full-day charge. Early contract termination may affect your rental rate.",
+            postulates: [" If the rental company is picking up the car, ensure the vehicle is ready and accessible at the agreed time to avoid delays or extra charges."]
+        }
     }
 ]
 
